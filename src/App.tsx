@@ -35,9 +35,6 @@ function LoadingFallback() {
   );
 }
 
-console.log('hi');
-
-
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
