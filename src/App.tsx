@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClients";
 import { ErrorBoundary } from "./components/ErrorBoundary/ErrorBoundary";
-import { OfflineIndicator } from "./components/offlineIndicator.tsx/OfflineIndicator";
+import { OfflineIndicator } from "./components/offlineIndicator/OfflineIndicator";
 
 const HomePage = lazy(() =>
   import("./feautures/photos/pages/HomePage").then((m) => ({
