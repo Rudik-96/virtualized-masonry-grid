@@ -1,4 +1,5 @@
 // src/feautures/photos/pages/HomePage.tsx
+import { Link } from "react-router-dom";
 import { usePhotoFeed } from "../hooks/usePhotosFeed";
 
 export function HomePage() {
@@ -37,12 +38,17 @@ export function HomePage() {
       <ul style={{ listStyle: "none", padding: 0 }}>
         {photos.map((photo) => (
           <li key={photo.id} style={{ marginBottom: "16px" }}>
-            <img
-              src={photo.src.medium}
-              alt={photo.alt}
-              style={{ maxWidth: "100%", borderRadius: "8px" }}
-            />
-            <p>{photo.photographer}</p>
+            <Link
+              to={`/photo/${photo.id}`}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <img
+                src={photo.src.medium}
+                alt={photo.alt}
+                style={{ maxWidth: "100%", borderRadius: "8px" }}
+              />
+              <p>{photo.photographer}</p>
+            </Link>
           </li>
         ))}
       </ul>
