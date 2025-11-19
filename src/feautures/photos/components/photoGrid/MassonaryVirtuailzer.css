@@ -1,0 +1,22 @@
+.masonry-virtualizer {
+    width: 100%;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    padding: 16px;
+  }
+  
+  .masonry-container {
+    position: relative;
+    width: 100%;
+  }
+  
+  .masonry-sentinel {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    pointer-events: none;
+  }
+  
+  
