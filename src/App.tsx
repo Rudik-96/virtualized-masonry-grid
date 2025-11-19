@@ -4,6 +4,8 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from './lib/queryClients'
 import { useEffect } from 'react'
 import { httpClient } from './api/httpClient'
+import { HomePage } from './feautures/photos/pages/HomePage'
+import { PhotoDetailsPage } from './feautures/photos/pages/PhotoDetailsPage'
 
 function App() {
   
@@ -17,9 +19,9 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Routes>
-        <Route path="/" element={<div>Home page</div>} />
-        <Route path="/photo/:id" element={<div>Photo details</div>} />
+       <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/photo/:id" element={<PhotoDetailsPage />} />
       </Routes>
     </QueryClientProvider>
   )
