@@ -14,7 +14,7 @@ export function PhotoCard({ photo, style }: PhotoCardProps) {
 
   const aspectRatioPadding = (photo.height / photo.width) * 100;
 
-  const handleMouseEnter = useCallback(() => {
+  const prefetch = useCallback(() => {
     queryClient.prefetchQuery({
       queryKey: ['photo', photo.id],
       queryFn: () => import('../../../../api/services/photo').then(m => m.getPhoto(photo.id)),
@@ -27,7 +27,8 @@ export function PhotoCard({ photo, style }: PhotoCardProps) {
       to={`/photo/${photo.id}`}
       className="photo-card"
       style={style}
-      onMouseEnter={handleMouseEnter}
+      // префетч только по фокусу, чтобы не спамить ховерами
+      onFocus={prefetch}
       aria-label={`View details for ${photo.alt || `photo by ${photo.photographer}`}`}
       tabIndex={0}
     >

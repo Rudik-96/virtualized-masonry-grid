@@ -24,8 +24,7 @@ const styles = {
   },
 };
 
-const styleSheet = document.createElement("style");
-styleSheet.textContent = `
+const OFFLINE_STYLES = `
   @keyframes slideUp {
     from {
       transform: translateX(-50%) translateY(100px);
@@ -45,13 +44,21 @@ styleSheet.textContent = `
     }
   }
 `;
-if (!document.querySelector("#offline-indicator-styles")) {
-  styleSheet.id = "offline-indicator-styles";
-  document.head.appendChild(styleSheet);
-}
 
 export function OfflineIndicator() {
-  const [isOnline, setIsOnline] = useState(() => navigator.onLine);
+  const [isOnline, setIsOnline] = useState(() =>
+    typeof navigator !== "undefined" ? navigator.onLine : true,
+  );
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    if (document.querySelector("#offline-indicator-styles")) return;
+
+    const styleSheet = document.createElement("style");
+    styleSheet.id = "offline-indicator-styles";
+    styleSheet.textContent = OFFLINE_STYLES;
+    document.head.appendChild(styleSheet);
+  }, []);
 
   useEffect(() => {
     const handleOnline = () => setIsOnline(true);

@@ -1,22 +1,31 @@
 import { QueryClient } from "@tanstack/react-query";
 
+type MaybeStatusError = Error & { status?: number };
+
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 5 * 60 * 1000, 
-      gcTime: 10 * 60 * 1000,  
-      retry: (failureCount, error) => {
-        if (error instanceof Error && error.message.includes("429")) {
-          return failureCount < 2; 
+      staleTime: 5 * 60 * 1000,
+      gcTime: 10 * 60 * 1000,
+      retry: (failureCount, error: MaybeStatusError | unknown) => {
+        const status =
+          typeof error === "object" && error !== null && "status" in error
+            ? (error as any).status
+            : undefined;
+
+        if (status === 429) {
+          return failureCount < 2;
         }
-        if (error instanceof Error && error.message.includes("4")) {
-          return false; 
+
+        if (status && status >= 400 && status < 500) {
+          // don't retry normal client errors
+          return false;
         }
-        return failureCount < 3; 
+
+        return failureCount < 3;
       },
-      retryDelay: (attemptIndex) => {
-        return Math.min(1000 * 2 ** attemptIndex, 30000);
-      },
+      retryDelay: (attemptIndex) =>
+        Math.min(1000 * 2 ** attemptIndex, 30000),
       refetchOnWindowFocus: false,
       refetchOnReconnect: true,
       refetchOnMount: false,

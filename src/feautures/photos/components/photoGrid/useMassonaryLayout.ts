@@ -65,7 +65,7 @@ export function useMasonryLayout(
 ) {
   return useMemo(
     () => calculateMasonryLayout(photos, options),
-    [photos, options]
+    [photos, options.containerWidth, options.columnCount, options.gap]
   );
 }
 

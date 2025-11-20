@@ -4,41 +4,6 @@ import { usePhotoFeed } from "../hooks/usePhotosFeed";
 import { SearchBar } from "../components/searchBar/SearchBar";
 import { PhotoGrid } from "../components/photoGrid/PhotoGrid";
 
-const styles = {
-  page: {
-    display: "flex",
-    flexDirection: "column" as const,
-    height: "100vh",
-    width: "100%",
-    overflow: "hidden",
-  },
-  header: {
-    padding: "24px 32px",
-    background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-    color: "white",
-    boxShadow: "0 2px 12px rgba(0, 0, 0, 0.1)",
-    flexShrink: 0,
-  },
-  title: {
-    textAlign: "center" as const,
-    margin: "0 0 8px 0",
-    fontSize: "36px",
-    fontWeight: 700,
-  },
-  subtitle: {
-    textAlign: "center" as const,
-    margin: "0 0 24px 0",
-    fontSize: "16px",
-    opacity: 0.95,
-  },
-  content: {
-    flex: 1,
-    overflow: "hidden",
-    display: "flex",
-    flexDirection: "column" as const,
-  },
-};
-
 export function HomePage() {
   const [mode, setMode] = useState<"curated" | "search">("curated");
   const [searchQuery, setSearchQuery] = useState("");
@@ -81,10 +46,10 @@ export function HomePage() {
   }, []);
 
   return (
-    <div style={styles.page}>
-      <header style={styles.header}>
-        <h1 style={styles.title}>Photo Gallery</h1>
-        <p style={styles.subtitle}>
+    <div className="home-page">
+      <header className="home-header">
+        <h1 className="home-title">Photo Gallery</h1>
+        <p className="home-subtitle">
           {mode === "curated"
             ? "Discover curated photos from Pexels"
             : `Searching for "${searchQuery}"`}
@@ -111,7 +76,7 @@ export function HomePage() {
         </div>
       </header>
 
-      <main style={styles.content}>
+      <main className="home-content">
         <PhotoGrid
           photos={photos}
           isLoading={status === "pending"}
@@ -125,3 +90,5 @@ export function HomePage() {
     </div>
   );
 }
+
+export default HomePage;

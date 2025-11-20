@@ -30,9 +30,11 @@ export async function httpClient<T>(
 ): Promise<T> {
   const { signal, method = "GET", body } = config;
 
-  const headers: HeadersInit = {
-    "Content-Type": "application/json",
-  };
+  const headers: HeadersInit = {};
+
+  if (body != null) {
+    headers["Content-Type"] = "application/json";
+  }
 
   if (!USE_PROXY && API_KEY) {
     headers["Authorization"] = API_KEY;
