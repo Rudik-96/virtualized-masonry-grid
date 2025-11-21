@@ -1,4 +1,3 @@
-// src/App.tsx
 import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";

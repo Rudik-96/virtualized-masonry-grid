@@ -51,7 +51,7 @@ export function MasonryVirtualizer({
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && !isLoadingRef.current) {
-          isLoadingRef.current = true; // Prevent immediate re-trigger
+          isLoadingRef.current = true;
           onScrollEnd();
         }
       },

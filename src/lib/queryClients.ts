@@ -18,7 +18,6 @@ export const queryClient = new QueryClient({
         }
 
         if (status && status >= 400 && status < 500) {
-          // don't retry normal client errors
           return false;
         }
 

@@ -27,7 +27,6 @@ export function PhotoCard({ photo, style }: PhotoCardProps) {
       to={`/photo/${photo.id}`}
       className="photo-card"
       style={style}
-      // префетч только по фокусу, чтобы не спамить ховерами
       onFocus={prefetch}
       aria-label={`View details for ${photo.alt || `photo by ${photo.photographer}`}`}
       tabIndex={0}
