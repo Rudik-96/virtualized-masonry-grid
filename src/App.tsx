@@ -5,12 +5,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClients";
 import { ErrorBoundary } from "./components/ErrorBoundary/ErrorBoundary";
 import { OfflineIndicator } from "./components/offlineIndicator/OfflineIndicator";
-
-const HomePage = lazy(() =>
-  import("./feautures/photos/pages/HomePage").then((m) => ({
-    default: m.HomePage,
-  }))
-);
+import HomePage from "./feautures/photos/pages/HomePage";
 
 const PhotoDetailsPage = lazy(() =>
   import("./feautures/photos/pages/PhotoDetailsPage").then((m) => ({
