@@ -1,4 +1,5 @@
 import { forwardRef, useState, type FormEvent } from "react";
+import "./SearchBar.css";
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
@@ -25,26 +26,38 @@ export const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
     };
 
     return (
-      <form
-        onSubmit={handleSubmit}
-        style={{ display: "flex", gap: "8px", justifyContent: "center" }}
-      >
-        <input
-          ref={ref}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          placeholder="Search photos..."
-          style={{ padding: "8px 12px", minWidth: "260px" }}
-        />
-        <button type="submit" disabled={isLoading || !value.trim()}>
-          {isLoading ? "Searching..." : "Search"}
-        </button>
-        {hasQuery && (
-          <button type="button" onClick={handleReset}>
-            Reset
+      <div className="search-bar">
+        <form className="search-form" onSubmit={handleSubmit}>
+          <div className="search-input-wrapper">
+            <input
+              ref={ref}
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              placeholder="Search photos..."
+              className="search-input"
+              disabled={isLoading}
+            />
+            <span className="search-shortcut">/</span>
+          </div>
+          <button
+            type="submit"
+            className="search-button"
+            disabled={isLoading || !value.trim()}
+          >
+            {isLoading ? "Searching..." : "Search"}
           </button>
-        )}
-      </form>
+          {hasQuery && (
+            <button
+              type="button"
+              className="search-reset"
+              onClick={handleReset}
+              aria-label="Reset search"
+            >
+              ×
+            </button>
+          )}
+        </form>
+      </div>
     );
   }
 );
